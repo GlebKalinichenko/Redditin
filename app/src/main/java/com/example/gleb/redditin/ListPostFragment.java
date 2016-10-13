@@ -3,6 +3,7 @@ package com.example.gleb.redditin;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -70,6 +71,8 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
         switch (id) {
             case R.id.action_settings: {
                 Log.d(LOG_TAG, "Menu settings is clicked");
+                FragmentActivity activity = getActivity();
+                presenter.loadSettings(R.id.layout_container, activity);
                 break;
             }
 

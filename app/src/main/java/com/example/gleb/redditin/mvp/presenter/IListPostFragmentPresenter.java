@@ -1,5 +1,7 @@
 package com.example.gleb.redditin.mvp.presenter;
 
+import android.support.v4.app.FragmentActivity;
+
 import com.example.gleb.redditin.BaseFragment;
 import com.example.gleb.redditin.TestPostEntity;
 
@@ -12,4 +14,5 @@ public interface IListPostFragmentPresenter {
     void onDestroyView();
     void requestTestEntities();
     void receiveTestEntities(List<TestPostEntity> entities);
+    void loadSettings(int containerId, FragmentActivity activity);
 }

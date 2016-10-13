@@ -1,5 +1,7 @@
 package com.example.gleb.redditin;
 
+import android.support.v4.app.FragmentActivity;
+
 import com.example.gleb.redditin.mvp.model.IListPostFragmentModel;
 import com.example.gleb.redditin.mvp.presenter.IListPostFragmentPresenter;
 
@@ -22,5 +24,12 @@ public class ListPostFragmentModel implements IListPostFragmentModel {
         }
 
         presenter.receiveTestEntities(entities);
+    }
+
+    @Override
+    public void loadSettings(int containerId, FragmentActivity activity) {
+        SettingsFragment fragment = SettingsFragment.getInstance();
+        FragmentHelper helper = FragmentHelper.getInstance(activity);
+        helper.replaceFragment(containerId, fragment);
     }
 }

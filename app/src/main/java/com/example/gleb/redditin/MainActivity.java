@@ -17,6 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void initPostFragment(){
         BaseFragment fragment = ListPostFragment.getInstance();
-        FragmentHelper.loadFragment(R.id.layout_container, fragment, this);
+        FragmentHelper helper = FragmentHelper.getInstance(this);
+        helper.loadFragment(R.id.layout_container, fragment);
+//        SettingsFragment fragment = SettingsFragment.getInstance();
+//        FragmentHelper helper = FragmentHelper.getInstance(this);
+//        helper.replaceFragment(R.id.layout_container, fragment);
     }
 }
