@@ -17,4 +17,27 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="PostFragment"></style>
+
+    <style name="PostFragment.Button">
+        <item name="android:layout_height">@dimen/height_fab_list_post</item>
+        <item name="android:layout_margin">@dimen/fab_margin</item>
+    </style>
+
+    <!--Item element on posts adapter-->
+    <style name="PostFragment.ItemPost"></style>
+
+    <style name="PostFragment.ItemPost.PostImage">
+        <item name="android:src">@color/colorAccent</item>
+        <item name="android:layout_marginLeft">@dimen/item_post_image_margin_left</item>
+    </style>
+
+    <style name="PostFragment.ItemPost.ContainerDescription">
+        <item name="android:layout_marginLeft">@dimen/description_item_post_margin_left</item>
+    </style>
+
+    <style name="PostFragment.ItemPost.DescriptionText">
+        <item name="android:layout_marginTop">@dimen/description_item_post_margin_top</item>
+    </style>
+
 </resources>

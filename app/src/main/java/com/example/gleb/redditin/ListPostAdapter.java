@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -61,6 +62,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         private View itemView;
         private TextView titleTextView;
         private TextView textTextView;
+        private ImageView postImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -74,6 +76,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         public void bindWidgets(int position) {
             titleTextView = (TextView) itemView.findViewById(R.id.title_text);
             textTextView = (TextView) itemView.findViewById(R.id.description_text);
+            postImageView = (ImageView) itemView.findViewById(R.id.post_image);
 
             TestPostEntity entity = entities.get(position);
             String title = entity.getTitle();

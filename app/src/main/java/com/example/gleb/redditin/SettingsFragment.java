@@ -17,7 +17,10 @@ public class SettingsFragment extends PreferenceFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        settingsScreen();
+    }
 
+    private void settingsScreen(){
         getView().setBackgroundColor(Color.WHITE);
         getView().setClickable(true);
     }
