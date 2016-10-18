@@ -1,6 +1,7 @@
 package com.example.gleb.redditin;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -73,7 +74,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * Bind item row of list of posts with value
         * @param int position        Position of row
         * */
-        public void bindWidgets(int position) {
+        public void bindWidgets(final int position) {
             titleTextView = (TextView) itemView.findViewById(R.id.title_text);
             textTextView = (TextView) itemView.findViewById(R.id.description_text);
             postImageView = (ImageView) itemView.findViewById(R.id.post_image);
@@ -84,6 +85,18 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
 
             titleTextView.setText(title);
             textTextView.setText(description);
+
+            itemView.setOnClickListener(i -> loadItemFragment(entity));
+        }
+
+        /*
+        * Load item fragment on click on post item element
+        * @param TestPostEntity        Entity of item post
+        * */
+        private void loadItemFragment(TestPostEntity entity){
+            BaseFragment fragment = ItemPostFragment.getInstance(entity);
+            FragmentHelper helper = FragmentHelper.getInstance((FragmentActivity) context);
+            helper.replaceFragment(R.id.layout_container, fragment);
         }
     }
 }
