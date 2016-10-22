@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/background_light"
+    android:weightSum="1">
+
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/post_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                style="@style/PostFragment.ItemPost.PostImage"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="-20dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:src="@drawable/arrow_bg2"
+                android:layout_toRightOf="@id/post_image"/>
+
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/imageView1"
+                android:layout_marginTop="10dp"
+                android:layout_weight="6"
+                android:background="@drawable/round_corner_right"
+                android:padding="16dp"
+                android:layout_marginLeft="15dp"
+                android:lineSpacingExtra="8dp"
+                android:layout_marginRight="10dp"
+                android:text="Android charting application xml ui design. Android charting. " />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <!--<TextView-->
+        <!--android:text="TextView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/comment_text"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="10dp"-->
+        <!--android:padding="@dimen/activity_horizontal_margin"-->
+        <!--android:lineSpacingExtra="8dp"/>-->
+</LinearLayout>

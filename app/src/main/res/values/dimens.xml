@@ -6,7 +6,7 @@
     <dimen name="height_fab_list_post">455dp</dimen>
     <dimen name="item_post_size">50dp</dimen>
     <dimen name="item_post_image_margin_left">15dp</dimen>
-    <dimen name="description_item_post_margin_left">15dp</dimen>
+    <dimen name="description_item_post_padding_left">72dp</dimen>
     <dimen name="description_item_post_margin_start">15dp</dimen>
-    <dimen name="description_item_post_margin_top">5dp</dimen>
+    <dimen name="description_item_post_margin_top">2dp</dimen>
 </resources>

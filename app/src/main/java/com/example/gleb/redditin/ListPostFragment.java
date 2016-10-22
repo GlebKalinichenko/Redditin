@@ -48,6 +48,7 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(LOG_TAG, "On resume on list fragments is loaded");
         presenter.onResume();
     }
 

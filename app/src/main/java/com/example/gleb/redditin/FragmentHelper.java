@@ -53,7 +53,7 @@ public class FragmentHelper {
     public void replaceFragment(int containerId, BaseFragment fragment){
         FragmentManager fm = context.getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(containerId, fragment);
+        transaction.replace(containerId, fragment).addToBackStack(null);
         transaction.commit();
     }
 }

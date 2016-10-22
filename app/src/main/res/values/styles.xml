@@ -33,7 +33,7 @@
     </style>
 
     <style name="PostFragment.ItemPost.ContainerDescription">
-        <item name="android:layout_marginLeft">@dimen/description_item_post_margin_left</item>
+        <item name="android:paddingLeft">@dimen/description_item_post_padding_left</item>
     </style>
 
     <style name="PostFragment.ItemPost.DescriptionText">
