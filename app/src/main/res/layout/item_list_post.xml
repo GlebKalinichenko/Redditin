@@ -6,10 +6,10 @@
     <de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/post_image"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/list_item_post_image_size"
+        android:layout_height="@dimen/list_item_post_image_size"
         android:layout_centerVertical="true"
-        android:paddingLeft="16dp"
+        android:paddingLeft="@dimen/list_item_post_image_padding_left"
         android:src="@color/colorAccent"/>
 
     <LinearLayout
@@ -17,14 +17,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        style="@style/PostFragment.ItemPost.ContainerDescription"
-        android:layout_marginRight="16dp">
+        style="@style/ListPostFragment.ItemPost.ContainerDescription">
 
         <TextView
             android:text="title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/list_item_post_title_text_size"
             android:layout_gravity="center_vertical"
             android:id="@+id/title_text"
             style="@style/Base.TextAppearance.AppCompat.Subhead" />
@@ -34,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            style="@style/PostFragment.ItemPost.DescriptionText"
+            style="@style/ListPostFragment.ItemPost.DescriptionText"
             android:id="@+id/description_text"
             android:singleLine="true" />
 
@@ -44,9 +43,9 @@
         android:text="16 min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:id="@+id/date_text"
         android:layout_alignTop="@+id/post_image"
-        android:layout_marginRight="16dp"
+        style="@style/ListPostFragment.DateText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

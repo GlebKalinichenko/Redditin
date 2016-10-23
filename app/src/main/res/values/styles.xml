@@ -17,27 +17,66 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="PostFragment"></style>
+    <style name="ListPostFragment"></style>
 
-    <style name="PostFragment.Button">
-        <item name="android:layout_height">@dimen/height_fab_list_post</item>
+    <style name="ListPostFragment.Button">
+        <item name="android:layout_height">@dimen/list_height_fab_list_post</item>
         <item name="android:layout_margin">@dimen/fab_margin</item>
     </style>
 
+    <style name="ListPostFragment.DateText">
+        <item name="android:layout_marginRight">@dimen/list_date_text_item_post_margin_right</item>
+    </style>
+
     <!--Item element on posts adapter-->
-    <style name="PostFragment.ItemPost"></style>
+    <style name="ListPostFragment.ItemPost"></style>
 
-    <style name="PostFragment.ItemPost.PostImage">
+    <style name="ListPostFragment.ItemPost.PostImage">
         <item name="android:src">@color/colorAccent</item>
-        <item name="android:layout_marginLeft">@dimen/item_post_image_margin_left</item>
+        <item name="android:layout_marginLeft">@dimen/list_item_post_image_margin_left</item>
     </style>
 
-    <style name="PostFragment.ItemPost.ContainerDescription">
-        <item name="android:paddingLeft">@dimen/description_item_post_padding_left</item>
+    <style name="ListPostFragment.ItemPost.ContainerDescription">
+        <item name="android:paddingLeft">@dimen/list_description_item_post_padding_left</item>
+        <item name="android:layout_marginRight">@dimen/list_item_post_margin_right</item>
     </style>
 
-    <style name="PostFragment.ItemPost.DescriptionText">
-        <item name="android:layout_marginTop">@dimen/description_item_post_margin_top</item>
+    <style name="ListPostFragment.ItemPost.DescriptionText">
+        <item name="android:layout_marginTop">@dimen/list_description_item_post_margin_top</item>
+    </style>
+
+    <!--Comments screen-->
+
+    <style name="ItemPostFragment"></style>
+
+    <style name="ItemPostFragment.CommentsImage">
+        <item name="android:src">@color/colorAccent</item>
+        <item name="android:layout_marginLeft">@dimen/list_item_post_image_margin_left</item>
+        <item name="android:layout_marginTop">@dimen/comment_image_margin_top</item>
+    </style>
+
+    <style name="ItemPostFragment.ArrowImage">
+        <item name="android:layout_marginRight">@dimen/comment_image_allow_margin_right</item>
+        <item name="android:layout_marginTop">@dimen/comment_image_allow_margin_top</item>
+    </style>
+
+    <style name="ItemPostFragment.CommentText">
+        <item name="android:layout_marginTop">@dimen/comment_text_margin_top</item>
+        <item name="android:layout_marginLeft">@dimen/comment_text_margin_left</item>
+        <item name="android:layout_marginRight">@dimen/comment_text_margin_right</item>
+        <item name="android:padding">@dimen/comment_text_padding</item>
+        <item name="android:background">@drawable/round_corner_right</item>
+        <item name="android:lineSpacingExtra">@dimen/comment_text_line_space</item>
+    </style>
+
+    <style name="ItemPostFragment.CommentTextContainer">
+        <item name="android:layout_marginBottom">@dimen/comment_text_container_margin_bottom</item>
+    </style>
+
+    <style name="CommentBottomSheetLayout"></style>
+
+    <style name="CommentBottomSheetLayout.ContainerBottomSheet">
+        <item name="android:layout_marginBottom">@dimen/comment_text_container_margin_bottom</item>
     </style>
 
 </resources>

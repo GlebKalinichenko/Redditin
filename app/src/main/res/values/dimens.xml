@@ -3,10 +3,35 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="height_fab_list_post">455dp</dimen>
-    <dimen name="item_post_size">50dp</dimen>
-    <dimen name="item_post_image_margin_left">15dp</dimen>
-    <dimen name="description_item_post_padding_left">72dp</dimen>
-    <dimen name="description_item_post_margin_start">15dp</dimen>
-    <dimen name="description_item_post_margin_top">2dp</dimen>
+    <dimen name="list_height_fab_list_post">455dp</dimen>
+    <dimen name="list_item_post_size">50dp</dimen>
+    <dimen name="list_item_post_image_margin_left">15dp</dimen>
+    <dimen name="list_description_item_post_padding_left">72dp</dimen>
+    <dimen name="list_description_item_post_margin_start">15dp</dimen>
+    <dimen name="list_description_item_post_margin_top">2dp</dimen>
+    <dimen name="list_date_text_item_post_margin_right">16dp</dimen>
+    <dimen name="list_item_post_margin_right">16dp</dimen>
+    <dimen name="list_item_post_title_text_size">16sp</dimen>
+    <dimen name="list_item_post_image_size">56dp</dimen>
+    <dimen name="list_item_post_image_padding_left">16dp</dimen>
+    <dimen name="list_item_post_toolbar_height">300dp</dimen>
+    <dimen name="list_item_post_toolbar_margin_start">48dp</dimen>
+    <dimen name="list_item_post_toolbar_margin_end">64dp</dimen>
+
+    <!--Comments item screen-->
+    <dimen name="item_post_image_size">30dp</dimen>
+    <dimen name="comment_image_margin_top">10dp</dimen>
+    <dimen name="comment_image_allow_margin_right">-20dp</dimen>
+    <dimen name="comment_image_allow_margin_top">20dp</dimen>
+    <dimen name="comment_text_margin_top">10dp</dimen>
+    <dimen name="comment_text_margin_left">15dp</dimen>
+    <dimen name="comment_text_margin_right">10dp</dimen>
+    <dimen name="comment_text_padding">16dp</dimen>
+    <dimen name="comment_text_line_space">8dp</dimen>
+    <dimen name="comment_text_container_margin_bottom">10dp</dimen>
+
+    <!--Comment bottom sheet-->
+    <dimen name="comment_bottom_sheet_all_height">340dp</dimen>
+    <dimen name="comment_bottom_sheet_peek_height">60dp</dimen>
+    <dimen name="comment_bottom_sheet_header_container_height">60dp</dimen>
 </resources>

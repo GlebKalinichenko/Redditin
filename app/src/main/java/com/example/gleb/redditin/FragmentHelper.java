@@ -41,7 +41,7 @@ public class FragmentHelper {
     public void replaceFragment(int containerId, PreferenceFragment fragment){
         android.app.FragmentManager fm = context.getFragmentManager();
         android.app.FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(containerId, fragment).addToBackStack(null);
+        transaction.replace(containerId, fragment).addToBackStack(null);
         transaction.commit();
     }
 
