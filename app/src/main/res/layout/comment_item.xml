@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/background_light"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:id="@+id/comment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/comment_text_container"
+            style="style/ItemPostFragment.CommentTextContainer">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/post_image"
+                android:layout_width="@dimen/item_post_image_size"
+                android:layout_height="@dimen/item_post_image_size"
+                style="@style/ItemPostFragment.CommentsImage"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/arrow_image"
+                android:layout_width="@dimen/item_post_image_size"
+                android:layout_height="@dimen/item_post_image_size"
+                style="@style/ItemPostFragment.ArrowImage"
+                android:layout_weight="1"
+                android:src="@drawable/arrow_bg2"
+                android:layout_toRightOf="@id/post_image"/>
+
+            <TextView
+                android:id="@+id/comment_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ItemPostFragment.CommentText"
+                android:layout_toRightOf="@id/arrow_image"
+                android:layout_weight="6"
+                android:text="Android charting application xml ui design. Android charting. " />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>
