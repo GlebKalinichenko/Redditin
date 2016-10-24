@@ -1,5 +1,6 @@
 package com.example.gleb.redditin;
 
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.gleb.redditin.mvp.model.IListPostFragmentModel;
@@ -8,12 +9,19 @@ import com.example.gleb.redditin.mvp.presenter.IListPostFragmentPresenter;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
+
 public class ListPostFragmentModel implements IListPostFragmentModel {
     private final String LOG_TAG = this.getClass().getCanonicalName();
     private IListPostFragmentPresenter presenter;
+    private BlogApiService apiService;
+    private Context context;
 
-    public ListPostFragmentModel(IListPostFragmentPresenter presenter) {
+    public ListPostFragmentModel(IListPostFragmentPresenter presenter, Context context) {
         this.presenter = presenter;
+        this.context = context;
+        apiService = BlogApiService.getInstance(context);
+        apiService.initBlogReceiverApi();
     }
 
     public void testPostEntities(){
@@ -31,5 +39,14 @@ public class ListPostFragmentModel implements IListPostFragmentModel {
         SettingsFragment fragment = SettingsFragment.getInstance();
         FragmentHelper helper = FragmentHelper.getInstance(activity);
         helper.replaceFragment(containerId, fragment);
+    }
+
+    /*
+    * Receive posts from blog api
+    * */
+    @Override
+    public void getPosts() {
+        List<Observable<TestPostEntity>> posts = apiService.getPosts();
+
     }
 }

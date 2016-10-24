@@ -1,5 +1,6 @@
 package com.example.gleb.redditin;
 
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -13,10 +14,12 @@ public class ListPostFragmentPresenter implements IListPostFragmentPresenter {
     private final String LOG_TAG = this.getClass().getCanonicalName();
     private IListPostFragmentView view;
     private IListPostFragmentModel model;
+    private Context context;
 
-    public ListPostFragmentPresenter(IListPostFragmentView view) {
+    public ListPostFragmentPresenter(IListPostFragmentView view, Context context) {
         this.view = view;
-        this.model = new ListPostFragmentModel(this);
+        this.context = context;
+        this.model = new ListPostFragmentModel(this, context);
     }
 
     @Override

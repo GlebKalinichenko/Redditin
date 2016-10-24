@@ -20,7 +20,8 @@ import java.util.List;
 
 public class ListPostFragment extends BaseFragment implements IListPostFragmentView, Toolbar.OnMenuItemClickListener {
     private final String LOG_TAG = this.getClass().getCanonicalName();
-    private IListPostFragmentPresenter presenter = new ListPostFragmentPresenter(this);
+    private Context context = getActivity();
+    private IListPostFragmentPresenter presenter = new ListPostFragmentPresenter(this, getActivity());
     private RecyclerView postList;
     private ListPostAdapter adapter;
 
