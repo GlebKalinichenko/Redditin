@@ -3,6 +3,8 @@ package com.example.gleb.redditin;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 
+import com.example.gleb.redditin.entities.PostDataEntity;
+import com.example.gleb.redditin.entities.PostResponseEntity;
 import com.example.gleb.redditin.mvp.model.IListPostFragmentModel;
 import com.example.gleb.redditin.mvp.presenter.IListPostFragmentPresenter;
 
@@ -46,7 +48,7 @@ public class ListPostFragmentModel implements IListPostFragmentModel {
     * */
     @Override
     public void getPosts() {
-        List<Observable<TestPostEntity>> posts = apiService.getPosts();
-
+        Observable<PostResponseEntity> posts = apiService.getPosts();
+        presenter.initDisplayPosts(posts);
     }
 }

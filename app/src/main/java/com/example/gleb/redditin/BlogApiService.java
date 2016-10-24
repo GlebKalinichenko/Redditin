@@ -1,12 +1,10 @@
 package com.example.gleb.redditin;
 
 import android.content.Context;
-import android.os.Build;
 import android.util.Log;
-
-import java.util.List;
-
+import com.example.gleb.redditin.entities.PostResponseEntity;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 
@@ -32,16 +30,18 @@ public class BlogApiService {
     * Initialize api for receive posts of blog
     * */
     public void initBlogReceiverApi(){
-        retrofit = new Retrofit.Builder().baseUrl(BuildApiUtil.API_PATH).addConverterFactory(GsonConverterFactory.create()).build();
+        retrofit = new Retrofit.Builder().baseUrl(BuildApiUtil.API_PATH).addConverterFactory(GsonConverterFactory.create()).
+                addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
         api = retrofit.create(BlogApi.class);
     }
 
     /*
     * Receive posts from blog api
     * */
-    public List<Observable<TestPostEntity>> getPosts(){
+    public Observable<PostResponseEntity> getPosts(){
         Log.d(LOG_TAG, "Posts was received");
-        List<Observable<TestPostEntity>> entities = api.getPosts();
+
+        Observable<PostResponseEntity> entities = api.getPosts();
         return entities;
     }
 }
