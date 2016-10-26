@@ -1,6 +1,8 @@
 package com.example.gleb.redditin;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -22,11 +24,13 @@ public class ListPostFragmentPresenter implements IListPostFragmentPresenter {
     private IListPostFragmentView view;
     private IListPostFragmentModel model;
     private Context context;
+    private NetworkHelper networkHelper;
 
     public ListPostFragmentPresenter(IListPostFragmentView view, Context context) {
         this.view = view;
         this.context = context;
         this.model = new ListPostFragmentModel(this, context);
+        networkHelper = NetworkHelper.getInstance(context);
     }
 
     @Override
@@ -87,9 +91,17 @@ public class ListPostFragmentPresenter implements IListPostFragmentPresenter {
     * */
     @Override
     public void initDisplayPosts(Observable<PostResponseEntity> entities) {
-        entities.map(i -> i.getData()).map(i -> i.getChildren()).flatMap(i -> Observable.from(i)).map(i -> i.getData())
-                .reduce(new ArrayList<PostEntity>(), (arr, value) -> {arr.add(value); return arr;})
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(i -> view.displayPosts(i));
+        if (networkHelper.isNetworkConnection()) {
+            entities.map(i -> i.getData()).map(i -> i.getChildren()).flatMap(i -> Observable.from(i)).map(i -> i.getData())
+                    .reduce(new ArrayList<PostEntity>(), (arr, value) -> {
+                        arr.add(value);
+                        return arr;
+                    })
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(i -> view.displayPosts(i));
+        }
+        else {
+            //load data from database
+        }
     }
 }
