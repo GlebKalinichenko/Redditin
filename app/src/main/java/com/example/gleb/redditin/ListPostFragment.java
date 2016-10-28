@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.gleb.redditin.entities.PostEntity;
 import com.example.gleb.redditin.mvp.presenter.IListPostFragmentPresenter;
 import com.example.gleb.redditin.mvp.view.IListPostFragmentView;
 
@@ -20,7 +21,8 @@ import java.util.List;
 
 public class ListPostFragment extends BaseFragment implements IListPostFragmentView, Toolbar.OnMenuItemClickListener {
     private final String LOG_TAG = this.getClass().getCanonicalName();
-    private IListPostFragmentPresenter presenter = new ListPostFragmentPresenter(this);
+    private Context context = getActivity();
+    private IListPostFragmentPresenter presenter;
     private RecyclerView postList;
     private ListPostAdapter adapter;
 
@@ -30,12 +32,17 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
         return fragment;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        presenter = new ListPostFragmentPresenter(this, getActivity());
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_posts, container, false);
         initWidgets(view);
-        presenter.requestTestEntities();
         return view;
     }
 
@@ -98,6 +105,20 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
     * */
     @Override
     public void displayPostList(List<TestPostEntity> entities) {
+        Context context = getActivity();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        postList.setLayoutManager(linearLayoutManager);
+        postList.setHasFixedSize(true);
+
+//        adapter = new ListPostAdapter(entities, context);
+
+        postList.setAdapter(adapter);
+    }
+
+    @Override
+    public void displayPosts(List<PostEntity> entities) {
         Context context = getActivity();
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);

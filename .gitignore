@@ -7,3 +7,6 @@
 /build
 /captures
 .externalNativeBuild
+libs/
+src/main/java/com/example/gleb/redditin/BuildApiUtil.java
+src/main/java/com/example/gleb/redditin/adapter/

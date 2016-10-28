@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.gleb.redditin.entities.PostEntity;
 import com.example.gleb.redditin.mvp.presenter.IItemPostFragmentPresenter;
 import com.example.gleb.redditin.mvp.view.IItemPostFragmentView;
 
@@ -31,7 +32,7 @@ public class ItemPostFragment extends BaseFragment implements Toolbar.OnMenuItem
     private TextView descriptionText;
     private IItemPostFragmentPresenter presenter = new ItemPostPresenter(this);
 
-    public static ItemPostFragment getInstance(TestPostEntity entity) {
+    public static ItemPostFragment getInstance(PostEntity entity) {
         ItemPostFragment fragment = new ItemPostFragment();
 
         Bundle args = new Bundle();
@@ -45,10 +46,10 @@ public class ItemPostFragment extends BaseFragment implements Toolbar.OnMenuItem
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_post, container, false);
-        TestPostEntity entity = (TestPostEntity) getArguments().getSerializable(ENTITY_KEY);
+        PostEntity entity = (PostEntity) getArguments().getSerializable(ENTITY_KEY);
 
         initWidgets(view);
-        initContent(entity);
+        //initContent(entity);
         initCommentsBottomSheet(view);
 
         return view;

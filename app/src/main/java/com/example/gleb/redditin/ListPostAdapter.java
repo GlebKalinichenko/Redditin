@@ -10,14 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.gleb.redditin.entities.PostEntity;
+
 import java.util.List;
 
 public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHolder> {
     private final String LOG_TAG = this.getClass().getCanonicalName();
-    private List<TestPostEntity> entities;
+    private List<PostEntity> entities;
     private Context context;
 
-    public ListPostAdapter(List<TestPostEntity> entities, Context context) {
+    public ListPostAdapter(List<PostEntity> entities, Context context) {
         this.entities = entities;
         this.context = context;
     }
@@ -47,7 +49,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
     * Add entity for list posts
     * @param TestPostEntity entity        Pushing entity
     * */
-    public void addItem(TestPostEntity entity) {
+    public void addItem(PostEntity entity) {
         entities.add(entity);
     }
 
@@ -61,8 +63,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private View itemView;
+        private TextView authorTextView;
         private TextView titleTextView;
-        private TextView textTextView;
         private ImageView postImageView;
 
         public ViewHolder(View itemView) {
@@ -75,16 +77,16 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * @param int position        Position of row
         * */
         public void bindWidgets(final int position) {
+            authorTextView = (TextView) itemView.findViewById(R.id.author_text);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text);
-            textTextView = (TextView) itemView.findViewById(R.id.description_text);
             postImageView = (ImageView) itemView.findViewById(R.id.post_image);
 
-            TestPostEntity entity = entities.get(position);
-            String title = entity.getTitle();
-            String description = entity.getText();
+            PostEntity entity = entities.get(position);
+            String title = entity.getAuthor();
+            String description = entity.getTitle();
 
-            titleTextView.setText(title);
-            textTextView.setText(description);
+            authorTextView.setText(title);
+            titleTextView.setText(description);
 
             itemView.setOnClickListener(i -> loadItemFragment(entity));
         }
@@ -93,7 +95,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * Load item fragment on click on post item element
         * @param TestPostEntity        Entity of item post
         * */
-        private void loadItemFragment(TestPostEntity entity){
+        private void loadItemFragment(PostEntity entity){
             BaseFragment fragment = ItemPostFragment.getInstance(entity);
             FragmentHelper helper = FragmentHelper.getInstance((FragmentActivity) context);
             helper.replaceFragment(R.id.layout_container, fragment);
