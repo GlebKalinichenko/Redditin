@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.gleb.redditin.entities.PostEntity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHolder> {
@@ -61,7 +63,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         entities.remove(entity);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         private View itemView;
         private TextView authorTextView;
         private TextView titleTextView;
@@ -77,6 +79,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * @param int position        Position of row
         * */
         public void bindWidgets(final int position) {
+            itemView.setOnLongClickListener(this);
+
             authorTextView = (TextView) itemView.findViewById(R.id.author_text);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text);
             postImageView = (ImageView) itemView.findViewById(R.id.post_image);
@@ -96,9 +100,18 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * @param TestPostEntity        Entity of item post
         * */
         private void loadItemFragment(PostEntity entity){
-            BaseFragment fragment = ItemPostFragment.getInstance(entity);
-            FragmentHelper helper = FragmentHelper.getInstance((FragmentActivity) context);
-            helper.replaceFragment(R.id.layout_container, fragment);
+            OnClickEvent event = new OnClickEvent(entity);
+            EventBus.getDefault().post(event);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            int position = getAdapterPosition();
+            Log.d(LOG_TAG, "Multi choice is called");
+            OnClickLongEvent event = new OnClickLongEvent(position);
+            EventBus.getDefault().post(event);
+            return true;
+
         }
     }
 }

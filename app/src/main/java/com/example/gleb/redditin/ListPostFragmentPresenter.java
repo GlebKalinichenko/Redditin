@@ -5,6 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.ActionMode;
 
 import com.example.gleb.redditin.entities.PostEntity;
 import com.example.gleb.redditin.entities.PostResponseEntity;
@@ -103,5 +104,30 @@ public class ListPostFragmentPresenter implements IListPostFragmentPresenter {
         else {
             //load data from database
         }
+    }
+
+    /*
+    * Load action mode on long click on list
+    * @param MultipleChoiceCallback callback    Callback for handle action mode
+    * @param FragmentActivity activity          Host activity
+    * */
+    @Override
+    public ActionMode loadActionMode(ListPostFragment.MultipleChoiceCallback callback, FragmentActivity activity) {
+        ActionMode actionMode = activity.startActionMode(callback);
+        return actionMode;
+    }
+
+    /*
+    * Load new fragment with description of choosen post
+    * @param ActionMode actionMode       Action mode for close on loading new fragment
+    * @param OnClickEvent event          Event with entity of desctiption of post
+    * */
+    @Override
+    public void loadItemPost(ActionMode actionMode, OnClickEvent event) {
+        actionMode.finish();
+        PostEntity entity = event.getEntity();
+        BaseFragment fragment = ItemPostFragment.getInstance(entity);
+        FragmentHelper helper = FragmentHelper.getInstance((FragmentActivity) context);
+        helper.replaceFragment(R.id.layout_container, fragment);
     }
 }
