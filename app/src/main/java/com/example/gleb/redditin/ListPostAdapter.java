@@ -10,10 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gleb.redditin.entities.PostEntity;
+import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+
+import rx.Observable;
 
 public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHolder> {
     private final String LOG_TAG = this.getClass().getCanonicalName();
@@ -89,14 +92,22 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
             titleTextView = (TextView) itemView.findViewById(R.id.title_text);
             postImageView = (ImageView) itemView.findViewById(R.id.post_image);
 
+            displayItemContent(position);
+        }
+
+        private void displayItemContent(int position){
             PostEntity entity = entities.get(position);
             String title = entity.getAuthor();
             String description = entity.getTitle();
+            String url = entity.getThumbnail();
 
             authorTextView.setText(title);
             titleTextView.setText(description);
 
             itemView.setOnClickListener(i -> loadItemFragment(entity));
+            if (url != null) {
+                Picasso.with(context).load(url).into(postImageView);
+            }
         }
 
         /*

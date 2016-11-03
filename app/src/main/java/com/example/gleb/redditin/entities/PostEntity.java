@@ -1,12 +1,19 @@
 package com.example.gleb.redditin.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class PostEntity implements Serializable {
+    @SerializedName("author")
     private String author;
+    @SerializedName("title")
     private String title;
+    @SerializedName("thumbnail")
     private String thumbnail;
+    @SerializedName("num_comments")
     private String num_comments;
+    @SerializedName("url")
     private String url;
 
     public PostEntity(String author, String title, String thumbnail, String num_comments, String url) {
