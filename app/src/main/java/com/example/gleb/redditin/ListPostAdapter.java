@@ -1,7 +1,6 @@
 package com.example.gleb.redditin;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,8 +58,13 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
     * Remove entity from list posts
     * @param TestPostEntity entity        Deleting entity
     * */
-    public void removeItem(TestPostEntity entity) {
+    public void removeItem(PostEntity entity) {
         entities.remove(entity);
+    }
+
+    public PostEntity getItem(int position) {
+        PostEntity entity = entities.get(position);
+        return entity;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {

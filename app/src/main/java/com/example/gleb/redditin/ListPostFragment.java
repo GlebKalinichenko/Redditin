@@ -94,7 +94,7 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
     @Subscribe
     public void onEvent(OnClickLongEvent event){
         FragmentActivity activity = getActivity();
-        MultipleChoiceCallback callback = new MultipleChoiceCallback();
+        MultipleChoiceCallback callback = new MultipleChoiceCallback(event);
         actionMode = presenter.loadActionMode(callback, activity);
     }
 
@@ -163,6 +163,11 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
 
     public class MultipleChoiceCallback implements ActionMode.Callback {
         private final String LOG_TAG = this.getClass().getCanonicalName();
+        private OnClickLongEvent event;
+
+        public MultipleChoiceCallback(OnClickLongEvent event) {
+            this.event = event;
+        }
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
@@ -183,6 +188,7 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
             switch (menuItemId) {
                 case R.id.action_delete:
                     Log.d(LOG_TAG, "Deleted item");
+                    presenter.deleteItemPost(event, adapter, actionMode);
                     break;
 
             }

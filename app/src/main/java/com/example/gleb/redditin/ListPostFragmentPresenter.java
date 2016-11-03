@@ -124,10 +124,20 @@ public class ListPostFragmentPresenter implements IListPostFragmentPresenter {
     * */
     @Override
     public void loadItemPost(ActionMode actionMode, OnClickEvent event) {
-        actionMode.finish();
+        if (actionMode != null)
+            actionMode.finish();
         PostEntity entity = event.getEntity();
         BaseFragment fragment = ItemPostFragment.getInstance(entity);
         FragmentHelper helper = FragmentHelper.getInstance((FragmentActivity) context);
         helper.replaceFragment(R.id.layout_container, fragment);
+    }
+
+    @Override
+    public void deleteItemPost(OnClickLongEvent event, ListPostAdapter adapter, ActionMode actionMode) {
+        int position = event.getPosition();
+        PostEntity entity = adapter.getItem(position);
+        adapter.removeItem(entity);
+        adapter.notifyDataSetChanged();
+        actionMode.finish();
     }
 }
