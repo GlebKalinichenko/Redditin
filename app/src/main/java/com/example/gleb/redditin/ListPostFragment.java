@@ -8,7 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +19,9 @@ import android.view.ViewGroup;
 import com.example.gleb.redditin.entities.PostEntity;
 import com.example.gleb.redditin.mvp.presenter.IListPostFragmentPresenter;
 import com.example.gleb.redditin.mvp.view.IListPostFragmentView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -25,6 +31,7 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
     private IListPostFragmentPresenter presenter;
     private RecyclerView postList;
     private ListPostAdapter adapter;
+    private ActionMode actionMode;
 
     public static ListPostFragment getInstance() {
         ListPostFragment fragment = new ListPostFragment();
@@ -36,6 +43,13 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
     public void onAttach(Context context) {
         super.onAttach(context);
         presenter = new ListPostFragmentPresenter(this, getActivity());
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        EventBus.getDefault().unregister(this);
     }
 
     @Nullable
@@ -71,6 +85,22 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
         toolbar.inflateMenu(R.menu.menu_list_post);//load menu from layout
         toolbar.setOnMenuItemClickListener(this);
         postList = (RecyclerView) view.findViewById(R.id.list_posts);
+    }
+
+    /*
+    * Handle on long click on list of posts for visible choice mode at toolbar
+    * @param OnClickLongEvent event    Event of callback from list of post's adapter
+    * */
+    @Subscribe
+    public void onEvent(OnClickLongEvent event){
+        FragmentActivity activity = getActivity();
+        MultipleChoiceCallback callback = new MultipleChoiceCallback(event);
+        actionMode = presenter.loadActionMode(callback, activity);
+    }
+
+    @Subscribe
+    public void onEvent(OnClickEvent event){
+        presenter.loadItemPost(actionMode, event);
     }
 
     @Override
@@ -129,5 +159,46 @@ public class ListPostFragment extends BaseFragment implements IListPostFragmentV
         adapter = new ListPostAdapter(entities, context);
 
         postList.setAdapter(adapter);
+    }
+
+    public class MultipleChoiceCallback implements ActionMode.Callback {
+        private final String LOG_TAG = this.getClass().getCanonicalName();
+        private OnClickLongEvent event;
+
+        public MultipleChoiceCallback(OnClickLongEvent event) {
+            this.event = event;
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater menuInflater = mode.getMenuInflater();
+            menuInflater.inflate(R.menu.choice_menu, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            int menuItemId = item.getItemId();
+
+            switch (menuItemId) {
+                case R.id.action_delete:
+                    Log.d(LOG_TAG, "Deleted item");
+                    presenter.deleteItemPost(event, adapter, actionMode);
+                    break;
+
+            }
+
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            //actionMode = null;
+        }
     }
 }

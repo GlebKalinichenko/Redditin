@@ -1,7 +1,6 @@
 package com.example.gleb.redditin;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gleb.redditin.entities.PostEntity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -57,11 +58,16 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
     * Remove entity from list posts
     * @param TestPostEntity entity        Deleting entity
     * */
-    public void removeItem(TestPostEntity entity) {
+    public void removeItem(PostEntity entity) {
         entities.remove(entity);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public PostEntity getItem(int position) {
+        PostEntity entity = entities.get(position);
+        return entity;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         private View itemView;
         private TextView authorTextView;
         private TextView titleTextView;
@@ -77,6 +83,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * @param int position        Position of row
         * */
         public void bindWidgets(final int position) {
+            itemView.setOnLongClickListener(this);
+
             authorTextView = (TextView) itemView.findViewById(R.id.author_text);
             titleTextView = (TextView) itemView.findViewById(R.id.title_text);
             postImageView = (ImageView) itemView.findViewById(R.id.post_image);
@@ -96,9 +104,18 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.ViewHo
         * @param TestPostEntity        Entity of item post
         * */
         private void loadItemFragment(PostEntity entity){
-            BaseFragment fragment = ItemPostFragment.getInstance(entity);
-            FragmentHelper helper = FragmentHelper.getInstance((FragmentActivity) context);
-            helper.replaceFragment(R.id.layout_container, fragment);
+            OnClickEvent event = new OnClickEvent(entity);
+            EventBus.getDefault().post(event);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            int position = getAdapterPosition();
+            Log.d(LOG_TAG, "Multi choice is called");
+            OnClickLongEvent event = new OnClickLongEvent(position);
+            EventBus.getDefault().post(event);
+            return true;
+
         }
     }
 }
